@@ -1,0 +1,17 @@
+{
+    "name": "Your Bot Name",
+    "developers": {
+        "username": ["Discord Username"],
+        "id": ["Discord Id"]
+    },
+    "messageConfig": {
+        "globalEmojis": {
+            "cross": "❌",
+            "tick": "✔",
+            "generating": "🌟",
+            "loading": "🔃",
+            "warning": "⚠",
+            "security": "🔐"
+        }
+    }
+}
