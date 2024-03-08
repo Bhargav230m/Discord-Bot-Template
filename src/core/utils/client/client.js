@@ -21,5 +21,6 @@ const client = new Client({
 //creating collections
 client.commands = new Collection();
 client.components = new Collection();
+client.unknown = new Collection();
 
 export default client;

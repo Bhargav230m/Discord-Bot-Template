@@ -1,13 +1,18 @@
 import { connect } from "mongoose";
 import "colors";
 
+/**
+ * Connects to the database
+ */
 async function connectToDB() {
   try {
-    console.log("Connecting to the database".yellow);
-    await connect(process.env.db);
-    console.log("Connected to the database".green);
+    if (process.env.mongodb_env) {
+      console.log("Connecting to the database".yellow);
+      await connect(mongodb_env);
+      console.log("Connected to the database".green);
+    }
   } catch (e) {
-    console.log("Failed to connect to te datbase".red);
+    console.log("Failed to connect to the datbase".red);
     console.error(e);
   }
 }

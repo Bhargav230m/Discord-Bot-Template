@@ -15,7 +15,7 @@ function checkForDeveloper(interaction) {
     (i) => interaction.user.username === i
   ); // Checking if the user's username is in the array
 
-  if (!foundId || !foundUserName) {
+  if (foundId || foundUserName) {
     return false;
   } else return true;
 }
