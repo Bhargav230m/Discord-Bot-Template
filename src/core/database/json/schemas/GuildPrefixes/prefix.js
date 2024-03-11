@@ -3,14 +3,13 @@ import arrowmentDB from "../../jsonDB.js";
 
 const data = {
   Guild: String,
-  User: String,
-  LastUsedData: Number,
+  Prefix: String,
 };
 
-const userCooldownData = new JsonSchema({
+const prefixData = new JsonSchema({
   schema: data,
   json_class: arrowmentDB,
-  name: "UserCooldowns",
+  name: "GuildPrefixes",
 });
 
-export default userCooldownData;
+export default prefixData;

@@ -1,33 +1,35 @@
+import loadFiles from "../../Functions/fileLoader.js";
 import "colors";
-import load from "./load.js";
 
-/**
- * @param {import("discord.js").Client} client
- * @param {import("discord.js").Collection<string, import("discord.js").Event>} event
- */
-function listenForEvents(event, client) {
-  //Loading the events
-  const eventName = event.default.name;
-  const execute = (...args) => event.default.execute(...args, client);
-  //Rest if set
-  if (event.default.rest) {
-    if (event.default.once) client.rest.once(eventName, execute);
-    else client.rest.on(eventName, execute);
-  } else {
-    //Execute once if set
-    if (event.default.once) client.once(eventName, execute);
-    else client.on(eventName, execute);
-  }
-}
-
-/**
- * @param {import("discord.js").Client} client
- */
 async function loadEvents(client) {
-  console.log("Refreshing event(s)".yellow);
-  await load("events", client.unknown, "src/events", listenForEvents, client);
+  const files = await loadFiles("src/events");
+  //Promising all the files and looping through them and executing them.
+  console.log(`Loading a total of ${files.length} event(s)...`.yellow);
 
-  console.log(`Successfully loaded event(s)`.green);
+  await Promise.all(
+    files.map(async (file) => {
+      const event = await import(`file://${file}`);
+      try {
+        //Loading the events
+        const eventName = event.default.name;
+        const execute = (...args) => event.default.execute(...args, client);
+        //Rest if set
+        if (event.default.rest) {
+          if (event.default.once) client.rest.once(eventName, execute);
+          else client.rest.on(eventName, execute);
+        } else {
+          //Execute once if set
+          if (event.default.once) client.once(eventName, execute);
+          else client.on(eventName, execute);
+        }
+
+        console.log(`Successfully loaded a total of ${files.length} event(s)...`.green);
+      } catch (err) {
+        console.log(`Failed to load event(s)`.red);
+        console.log(err);
+      }
+    })
+  );
 }
 
 export default loadEvents;

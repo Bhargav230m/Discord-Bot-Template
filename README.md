@@ -1,6 +1,6 @@
 # Discord Bot Template
 
-This Discord bot template is written in Discord.js using node.js. It provides various functionalities such as error handling, event handling, command handling, and component handling. The component handler supports handling buttons, all types of select menus, and modals. It also comes with mongodb support and utilizes ArrowmentJsonDB for small things 
+This Discord bot template is written in Discord.js using node.js. It provides various functionalities such as error handling, event handling, command handling, and component handling. The component handler supports handling buttons, all types of select menus, and modals. It also comes with mongodb support and utilizes ArrowmentJsonDB for small things
 
 ## Features
 
@@ -9,6 +9,7 @@ This Discord bot template is written in Discord.js using node.js. It provides va
   - **Event Handler:** Handles Discord.js events for seamless integration of bot functionality.
   - **Command Handler:** Allows easy creation and management of commands with support for validators like `devOnly` and `cooldown`.
   - **Component Handler:** Supports handling buttons, select menus, and modals with built-in validators like `devOnly` and `cooldown`.
+  - **Prefix Command Handler:** Supports handling prefix commands, with built-in validators like `devOnly` and `cooldown`.
 - **Validators:**
   - **devOnly:** Ensures that a command or component can only be used by developers or users with specific roles.
   - **cooldown:** Adds a cooldown period to prevent spamming of commands or components.
@@ -46,13 +47,35 @@ export default {
   data: new SlashCommandBuilder()
     .setName("example")
     .setDescription("Example command!"),
-  async execute(interaction, client) {
-  },
+  async execute(interaction, client) {},
 };
+```
 
+### Example Prefix Command
+
+```javascript
+// prefix/test/example.js
+
+import { Client, Message } from "discord.js";
+import ms from "ms";
+
+export default {
+  developer: true,
+  cooldown: ms("5s"),
+  name: "example",
+  aliases: ["ex", "exp"], //... more aliases
+
+  /**
+   *
+   * @param {Message} message
+   * @param {Client} client
+   */
+  async execute(message, client) {},
+};
 ```
 
 ## Example Component
+
 ```javascript
 // components/buttons/test.js
 
@@ -67,7 +90,6 @@ export default {
     interaction.reply({ content: "it works :)" });
   },
 };
-
 ```
 
 ## Contributing

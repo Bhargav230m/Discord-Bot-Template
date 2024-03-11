@@ -1,39 +1,27 @@
-import load from "./load.js";
+import loadFiles from "../../Functions/fileLoader.js";
 
-/**
- * Set commands to the client collection and return a array of commands data
- * @param {any} command 
- * @param {import("discord.js").Client} client 
- * @returns 
- */
-function setCommands(command, client) {
+async function loadCommands(client) {
+  await client.commands.clear();
+
+  const files = await loadFiles("src/commands");
+
   const commandsArray = [];
 
-  //Push all the data to the commands array
-  commandsArray.push(command.default.data.toJSON());
-  //Set the commands to the client.commands
-  client.commands.set(command.default.data.name, command);
-
-  return commandsArray;
-}
-
-/**
- * 
- * @param {import("discord.js").Client} client 
- * @returns 
- */
-async function loadCommands(client) {
-  //Load the commands
-  const data = await load(
-    "commands",
-    client.commands,
-    "src/commands",
-    setCommands,
-    client
+  //Promising all the files and looping through them and pushing them to commandsArray.
+  await Promise.all(
+    files.map(async (file) => {
+      const command = await import(`file://${file}`);
+      try {
+        //Setting the command to the commandArray and setting it to client.commands
+        commandsArray.push(command.default.data.toJSON());
+        client.commands.set(command.default.data.name, command);
+      } catch (err) {
+        console.log(err);
+      }
+    })
   );
 
-  //Return the data
-  return data;
+  return commandsArray;
 }
 
 export default loadCommands;

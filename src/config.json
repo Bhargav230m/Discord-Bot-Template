@@ -1,5 +1,9 @@
 {
     "name": "Your Bot Name",
+    "commandSetup": {
+        "globalCommands": true,
+        "guildId": "Set a guild if you set globalCommands to false"
+    },
     "developers": {
         "username": ["Discord Username"],
         "id": ["Discord Id"]
@@ -12,6 +16,8 @@
             "loading": "🔃",
             "warning": "⚠",
             "security": "🔐"
-        }
-    }
+        },
+        "default_prefix": "!"
+    },
+    "jsonDBStoragePath": "Your JsonDB storage path, for example: C:/Users/techn/OneDrive/Desktop/Projects/BotTemplate/src/core/database/json/data"
 }

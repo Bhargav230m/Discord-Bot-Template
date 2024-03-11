@@ -5,6 +5,7 @@ import loadEvents from "./loadEvents.js";
 import registerSlashCommand from "./registerSlashCommand.js";
 import "colors";
 import loadComponents from "./loadComponents.js";
+import loadPrefixCommands from "./loadPrefixCommands.js";
 
 //Functions to start the code
 async function start() {
@@ -17,6 +18,7 @@ async function start() {
       await registerSlashCommand(client);
       await loadEvents(client);
       await loadComponents(client);
+      await loadPrefixCommands(client)
       await connectToDB();  
     })
     .catch((err) => console.error(err));
@@ -29,3 +31,15 @@ async function start() {
 }
 
 export default start;
+
+
+/*
+
+
+░█████╗░██████╗░██████╗░░█████╗░░██╗░░░░░░░██╗███╗░░░███╗███████╗███╗░░██╗████████╗
+██╔══██╗██╔══██╗██╔══██╗██╔══██╗░██║░░██╗░░██║████╗░████║██╔════╝████╗░██║╚══██╔══╝
+███████║██████╔╝██████╔╝██║░░██║░╚██╗████╗██╔╝██╔████╔██║█████╗░░██╔██╗██║░░░██║░░░
+██╔══██║██╔══██╗██╔══██╗██║░░██║░░████╔═████║░██║╚██╔╝██║██╔══╝░░██║╚████║░░░██║░░░
+██║░░██║██║░░██║██║░░██║╚█████╔╝░░╚██╔╝░╚██╔╝░██║░╚═╝░██║███████╗██║░╚███║░░░██║░░░
+╚═╝░░╚═╝╚═╝░░╚═╝╚═╝░░╚═╝░╚════╝░░░░╚═╝░░░╚═╝░░╚═╝░░░░░╚═╝╚══════╝╚═╝░░╚══╝░░░╚═╝░░░
+*/

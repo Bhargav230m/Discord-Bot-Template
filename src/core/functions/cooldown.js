@@ -2,17 +2,22 @@ import userCooldownData from "../database/json/schemas/Cooldowns/userCooldown.js
 
 /**
  * Checks if a user has used a command recently
- * @param {import("discord.js").CommandInteraction} interaction - The Discord interaction
  * @param {number} cooldown - The cooldown time in milliseconds
  * @returns {Promise<boolean>} Whether the user can use the command or not
  */
-async function checkCooldown(interaction, cooldown) {
+async function checkCooldown(interaction, cooldown, message) {
   let guildId = interaction.guild.id;
-  let id = interaction.user.id;
-  const result = await userCooldownData.find({ Guild: guildId, User: id });
+  let id;
 
-  if (result) {
-    const data = result.jsonFiles;
+  if (message) {
+    id = interaction.author.id;
+  } else {
+    id = interaction.user.id;
+  }
+
+  const data = await userCooldownData.findData({ Guild: guildId, User: id });
+
+  if (data) {
     const lastUsed = data.LastUsedData;
     const subtraction = Date.now() - lastUsed;
 

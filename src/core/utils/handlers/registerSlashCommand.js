@@ -1,23 +1,29 @@
 import { REST, Routes } from "discord.js";
 import loadCommands from "./loadCommands.js";
+import config from "../../../config.json" assert { type: "json" };
 import "colors";
 
 async function registerSlashCommand(client) {
-  console.log("Refreshing (/) command(s)".yellow);
+  console.log("Refreshing (/) commands".yellow);
 
   //Registering the commands
   const rest = new REST({ version: "10" }).setToken(process.env.token);
   const commands = await loadCommands(client);
 
   try {
-    //Command data goes here
-    await rest.put(Routes.applicationCommands(process.env.botId), {
-      body: commands,
-    });
+    let setup;
+    if (config.commandSetup.globalCommands) {
+      setup = Routes.applicationCommands(process.env.botId)
+    } else {
+      setup = Routes.applicationGuildCommands(process.env.botId, config.commandSetup.guildId)
+    }
 
-    console.log("Successfully loaded (/) command(s)".green);
+    //Command data goes here
+    await rest.put(setup, {body: commands});
+
+    console.log("Successfully reloaded (/) commands".green);
   } catch (error) {
-    console.log("Failed to refresh (/) command(s)".red);
+    console.log("Failed to refresh (/) commands".red);
     console.error(error);
   }
 }

@@ -1,30 +1,26 @@
-import load from "./load.js";
+import loadFiles from "../../Functions/fileLoader.js";
 import "colors";
 
-/**
- * Adds a component to the collection of components.
- * @param {import("discord.js").ComponentInteraction} component The component to add to the collection.
- * @param {import("discord.js").Client} client The Discord.js Client.
- */
-function setComponentsToCollection(component, client) {
-  client.components.set(component.default.customId, component);
-}
-
-/**
- * Reloads all the components of the client.
- * @param {Client} client The Discord.js Client.
- */
 async function loadComponents(client) {
-  console.log("Refreshing component(s)".yellow);
-  await load(
-    "components",
-    client.components,
-    "src/components",
-    setComponentsToCollection,
-    client
-  );
+  await client.components.clear();
 
-  console.log("Successfully reloaded all the component(s)".green);
+  const files = await loadFiles("src/components");
+  console.log("Refreshing components".yellow)
+
+  //Promising all the files and looping through them and pushing them to commandsArray.
+  await Promise.all(
+    files.map(async (file) => {
+      const component = await import(`file://${file}`);
+      try {
+        client.components.set(component.default.customId, component);
+
+        console.log(`Successfully loaded all the components`.green);
+      } catch (err) {
+        console.log(err);
+        console.log(`An error occurred while loading components`.red)
+      }
+    })
+  );
 }
 
 export default loadComponents;
