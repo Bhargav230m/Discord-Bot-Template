@@ -22,13 +22,15 @@ async function loadEvents(client) {
           if (event.default.once) client.once(eventName, execute);
           else client.on(eventName, execute);
         }
-
-        console.log(`Successfully loaded a total of ${files.length} event(s)...`.green);
       } catch (err) {
         console.log(`Failed to load event(s)`.red);
         console.log(err);
       }
     })
+  );
+
+  console.log(
+    `Successfully loaded a total of ${files.length} event(s)...`.green
   );
 }
 

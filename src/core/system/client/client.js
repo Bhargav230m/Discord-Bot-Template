@@ -22,6 +22,6 @@ const client = new Client({
 client.commands = new Collection();
 client.components = new Collection();
 client.prefix_commands = new Collection();
-client.unknown = new Collection();
+client.cooldown = new Collection();
 
 export default client;

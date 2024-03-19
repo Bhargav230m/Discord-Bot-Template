@@ -1,5 +1,5 @@
 import { config } from "dotenv";
-import start from "./core/utils/handlers/start.js";
+import start from "./core/system/handlers/start.js";
 
 config();
 

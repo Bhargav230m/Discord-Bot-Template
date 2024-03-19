@@ -1,10 +1,10 @@
-import { ChatInputCommandInteraction, Client } from "discord.js"; // Importing required modules
-import config from "../../config.json" assert { type: "json" }; // Importing the configuration file
-import reply from "../../core/functions/reply.js"; // Importing the reply function
-import validateUser from "../../core/functions/validateUser.js"; // Importing the validateUser function
+import { ChatInputCommandInteraction, Client } from "discord.js";
+import config from "../../config.json" assert { type: "json" };
+import reply from "../../core/functions/reply.js";
+import validateUser from "../../core/functions/validateUser.js"; 
 
 export default {
-  name: "interactionCreate", // The name of the event
+  name: "interactionCreate",
 
   /**
    * The function that is executed when the event is triggered

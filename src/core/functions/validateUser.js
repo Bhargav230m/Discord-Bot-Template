@@ -1,8 +1,8 @@
-import { Collection, EmbedBuilder } from "discord.js"; // Importing required modules
+import { Collection, EmbedBuilder } from "discord.js";
 import checkForDeveloper from "./developerOnly.js";
-import config from "../../config.json" assert { type: "json" }; // Importing the configuration file
-import reply from "./reply.js"; // Importing the reply function
-import editReply from "./editReply.js"; // Importing the editReply function
+import config from "../../config.json" assert { type: "json" };
+import reply from "./reply.js";
+import editReply from "./editReply.js";
 import checkCooldown from "./cooldown.js";
 import humanize from "./humanize.js";
 
@@ -27,7 +27,8 @@ async function validateUser(collection, interaction, client, prefix, args) {
     results2 = await checkCooldown(
       interaction,
       collection.default.cooldown,
-      prefix
+      prefix,
+      client
     );
     if (results2) {
       message = `Please wait ${humanize(

@@ -6,9 +6,9 @@ import "colors";
  */
 async function connectToDB() {
   try {
-    if (process.env.mongodb_env) {
+    if (process.env.db) {
       console.log("Connecting to the database".yellow);
-      await connect(mongodb_env);
+      await connect(process.env.db);
       console.log("Connected to the database".green);
     }
   } catch (e) {

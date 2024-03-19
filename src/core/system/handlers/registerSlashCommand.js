@@ -19,7 +19,7 @@ async function registerSlashCommand(client) {
     }
 
     //Command data goes here
-    await rest.put(setup, {body: commands});
+    await rest.put(setup, { body: commands });
 
     console.log("Successfully reloaded (/) commands".green);
   } catch (error) {

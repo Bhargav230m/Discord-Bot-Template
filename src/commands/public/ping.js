@@ -1,5 +1,5 @@
 import { SlashCommandBuilder, EmbedBuilder } from "discord.js";
-import humanize from "../../Core/Functions/humanize.js";
+import humanize from "../../core/functions/humanize.js";
 import ms from "ms";
 
 export default {

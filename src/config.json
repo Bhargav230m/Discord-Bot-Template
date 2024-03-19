@@ -18,6 +18,5 @@
             "security": "🔐"
         },
         "default_prefix": "!"
-    },
-    "jsonDBStoragePath": "Your JsonDB storage path, for example: C:/Users/techn/OneDrive/Desktop/Projects/BotTemplate/src/core/database/json/data"
+    }
 }

@@ -2,31 +2,26 @@
  * Generate a unique product key of the specified length.
  *
  * @param {number} length - The length of the product key to generate.
- * @param {number} tlength - The total length of the product key
  * @returns {string} The generated product key.
  */
-function generateRandomId(tlength, length) {
-  if(!length) length = 0
-  
+function generateRandomId(length) {
   const characters = "AaBbCcDdEeFfGgHhKkLlMmNnXxSsQq";
   const id = process.pid;
-  let productKey = "";
+  let code = "";
 
-  for (let i = 0; i < tlength; i++) {
-    productKey += characters.charAt(
-      Math.floor(Math.random() * characters.length)
-    );
+  for (let i = 0; i < length; i++) {
+    code += characters.charAt(Math.floor(Math.random() * characters.length));
 
-    const n = Math.floor(Math.random() * tlength);
-    productKey += n
+    const n = Math.floor(Math.random() * length);
+    code += n;
   }
 
-  productKey += Date.now().toString().slice(0, 4);
+  code += Date.now().toString().slice(0, 4);
 
-  productKey += id;
-  productKey = productKey.slice(0, -length);
+  code += id;
+  code = code.slice(0, -length);
 
-  return productKey;
+  return code;
 }
 
-export default generateRandomId
+export default generateRandomId;

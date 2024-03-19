@@ -1,5 +1,4 @@
-import config from "../../config.json" assert { type: "json" }; // Importing the configuration file
-import reply from "./reply.js"; // Importing the reply function
+import config from "../../config.json" assert { type: "json" };
 
 /**
  * Checks if the user is a developer

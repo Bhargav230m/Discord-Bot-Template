@@ -1,7 +1,7 @@
 import { Message, Client } from "discord.js"; // Importing required modules
 import config from "../../config.json" assert { type: "json" }; // Importing the configuration file
 import validateUser from "../../core/functions/validateUser.js"; // Importing the validateUser function
-import prefixData from "../../core/database/json/schemas/GuildPrefixes/prefix.js";
+import prefixData from "../../core/database/mongodb/schemas/Prefix/prefix.js";
 
 export default {
   name: "messageCreate", // The name of the event
@@ -15,11 +15,10 @@ export default {
     if(message.author.bot) return;
 
     //Find the data in the database
-    const data = await prefixData.findData({ Guild: message.guild.id })
+    const data = prefixData.findOne({ Guild: message.guild.id });
 
     //Create a empty prefix var
     let prefix;
-
     if(data) {
         prefix = data.Prefix // The prefix is now the datbase
     } else {

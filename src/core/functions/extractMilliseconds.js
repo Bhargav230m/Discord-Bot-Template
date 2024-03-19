@@ -3,10 +3,10 @@ import moment from "moment";
 /**
  * NOTE:
  * PLEASE READ THIS BEFORE CONTINUING
- * 
+ *
  * Time given should not be like 1 month, 1 year, It should be like 1 months, 1 years, 4 years, 1 days, 10 days.
  * You need to have s after that like 1 months
-*/
+ */
 
 function extractMilliseconds(input) {
   const parsedInput = input.split(" ");
